@@ -89,7 +89,7 @@ public class ParserGeneral {
 
 
             for (StockGeneral g: CacheStockGeneral.getCache().values()) {
-                System.out.println(g.getName());
+                System.out.println(g.getCode());
             }
 
 

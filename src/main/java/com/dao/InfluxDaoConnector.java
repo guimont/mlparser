@@ -2,6 +2,8 @@ package com.dao;
 
 import com.dao.impl.InfluxDaoImpl;
 import com.influxdb.dto.BatchPoints;
+import com.influxdb.dto.Query;
+import com.influxdb.dto.QueryResult;
 
 /**
  * Created by gmo on 29/06/2015.
@@ -28,6 +30,13 @@ public class InfluxDaoConnector {
 
     public static void writePoints(final BatchPoints batchPoints) {
         getInstance().dao.getDB().write(batchPoints);
+    }
+
+    public static QueryResult getPoints(final String queryString) {
+        Query query = new Query(queryString, dbName);
+        QueryResult result = getInstance().dao.getDB().query(query);
+        return result;
+
     }
 
 
