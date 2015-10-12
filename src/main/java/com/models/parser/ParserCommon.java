@@ -14,11 +14,14 @@ public class ParserCommon {
 
 
 
-    public static String loadUrl(URL url) throws IOException {
+    public static String loadUrl(URL url) {
         InputStream stream = null;
         try {
             stream = url.openStream();
             return loadStream(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         } finally {
             if (stream != null) {
                 try {

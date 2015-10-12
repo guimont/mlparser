@@ -28,12 +28,21 @@ public class ParserHistory {
 
     public static void loader() {
 
-        int numPage = 1;
+        int numPage;
+        boolean retry = false;
         for (StockGeneral g: CacheStockGeneral.getCache().values()) {
-            //for(;numPage<20;numPage++) {
+            for(numPage = 20; numPage>0; numPage--) {
                 String url = startUrl + numPage + placeUrl + g.getPlace() + codeUrl + g.getCode() + endUrl;
                 try {
-                    String text = ParserCommon.loadUrl(new URL(url));
+                    String text = null;
+
+                    //inifinite loop
+                    do {
+                         text = ParserCommon.loadUrl(new URL(url));
+                        if (text == null) retry = true;
+                        else retry = false;
+                    } while (retry);
+
 
                     Document doc = Jsoup.parse(text);
 
@@ -88,7 +97,7 @@ public class ParserHistory {
                     e.printStackTrace();
                     System.out.println("ERROR for : " + g.getName());
                 }
-            //}
+            }
         }
     }
 
@@ -97,10 +106,10 @@ public class ParserHistory {
 
         Point pt = Point.measurement(hist.getCode()).time(hist.getTimeInsert().getMillis(), TimeUnit.MILLISECONDS)
                 .field("value",hist.getValue())
-                /*.field("high",hist.getHighest())
+                .field("high",hist.getHighest())
                 .field("low",hist.getLowest())
                 .field("open",hist.getOpening())
-                .field("volume",hist.getVolume())    */
+                .field("volume",hist.getVolume())
                 .build();
         bp.point(pt);
 
