@@ -28,14 +28,15 @@ public class test {
 
 
         /*InfluxDB influxDB = InfluxDBFactory.connect("http://127.0.0.1:8086", "root", "root");
-        String dbName = "aTimeSeries";
+        influxDB.ping();
+        /*String dbName = "aTimeSeries";
         influxDB.createDatabase(dbName);
-        influxDB.deleteDatabase(dbName);
+        influxDB.deleteDatabase(dbName);*/
 
-        ParserGeneral.loader();
+        /*ParserGeneral.loader();
         ParserHistory.loader();
-        System.out.println("parsing ok");
-*/
+        System.out.println("parsing ok");*/
+
 
         QueryResult res =InfluxDaoConnector.getPoints("SELECT * FROM FR0000131708");
 
