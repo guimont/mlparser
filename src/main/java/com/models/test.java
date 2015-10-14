@@ -33,12 +33,12 @@ public class test {
         influxDB.createDatabase(dbName);
         influxDB.deleteDatabase(dbName);*/
 
-        /*ParserGeneral.loader();
+        ParserGeneral.loader();
         ParserHistory.loader();
-        System.out.println("parsing ok");*/
+        System.out.println("parsing ok");
 
 
-        QueryResult res =InfluxDaoConnector.getPoints("SELECT * FROM FR0000131708");
+        /*QueryResult res =InfluxDaoConnector.getPoints("SELECT * FROM FR0000131708");
 
         int len = res.getResults().get(0).getSeries().get(0).getValues().size();
         List<Object> l = res.getResults().get(0).getSeries().get(0).getValues().get(len-50);
@@ -58,7 +58,7 @@ public class test {
         InfluxDaoConnector.writePoints(bp);
 
 
-        System.out.print(meanQ);
+        System.out.print(meanQ);*/
 
 
 

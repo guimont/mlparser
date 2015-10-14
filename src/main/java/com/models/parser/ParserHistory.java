@@ -105,11 +105,11 @@ public class ParserHistory {
 
 
         Point pt = Point.measurement(hist.getCode()).time(hist.getTimeInsert().getMillis(), TimeUnit.MILLISECONDS)
-                .field("value",hist.getValue())
-                .field("high",hist.getHighest())
+                .field("open", hist.getOpening())
+                .field("high", hist.getHighest())
                 .field("low",hist.getLowest())
-                .field("open",hist.getOpening())
-                .field("volume",hist.getVolume())
+                .field("volume", hist.getVolume())
+                .field("value",hist.getValue())
                 .build();
         bp.point(pt);
 
