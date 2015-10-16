@@ -50,9 +50,9 @@ public class Analyse {
         double ref_mme12 = 0;
 
         Container c = new Container(res.getResults().get(0).getSeries().get(0).getValues().get(index).get(0).toString());
-        c.indice.put(MM20,mmRange(res, index, 20));
-        c.indice.put(MM50,mmRange(res, index, 50));
-        c.indice.put(STDDEV,stddevRange(res, index, 20));
+        c.indice.put(MM20,mmRange(res, code, index, 20));
+        c.indice.put(MM50,mmRange(res, code, index, 50));
+        c.indice.put(STDDEV,stddevRange(res, code, index, 20));
         ref_mme26 = mmeRange(res, index, ref_mme26, 0.075);
         ref_mme12 = mmeRange(res, index, ref_mme12, 0.15);
         c.indice.put(MME12, Double.toString(ref_mme12));
@@ -74,15 +74,15 @@ public class Analyse {
 
         int len = res.getResults().get(0).getSeries().get(0).getValues().size();
 
-        double ref_mme12 = Double.parseDouble(mmRange(res, 50, 20));
-        double ref_mme26 = Double.parseDouble(mmRange(res, 50, 20));
+        double ref_mme12 = Double.parseDouble(mmRange(res, code, 50, 12));
+        double ref_mme26 = Double.parseDouble(mmRange(res, code, 50, 26));
 
 
         for (int index = 50; index <len;index++ ) {
             Container c = new Container(res.getResults().get(0).getSeries().get(0).getValues().get(index).get(0).toString());
-            c.indice.put(MM20,mmRange(res, index, 20));
-            c.indice.put(MM50,mmRange(res, index, 50));
-            c.indice.put(STDDEV,stddevRange(res, index, 20));
+            c.indice.put(MM20,mmRange(res, code, index, 20));
+            c.indice.put(MM50,mmRange(res, code, index, 50));
+            c.indice.put(STDDEV,stddevRange(res, code, index, 20));
             ref_mme26 = mmeRange(res, index, ref_mme26, 0.075);
             ref_mme12 = mmeRange(res, index, ref_mme12, 0.15);
             c.indice.put(MME12, Double.toString(ref_mme12));
@@ -126,25 +126,25 @@ public class Analyse {
     }
 
 
-    public String stddevRange(QueryResult res, int index, int range) {
+    public String stddevRange(QueryResult res,String code, int index, int range) {
         List<Object> lStart = res.getResults().get(0).getSeries().get(0).getValues().get(index - range);
         List<Object> lEnd = res.getResults().get(0).getSeries().get(0).getValues().get(index);
 
-        String query = "SELECT stddev(value)*2 FROM FR0000131708 where time > '" + lStart.get(0) + "' and time < '"+ lEnd.get(0) + "'";
+        String query = "SELECT stddev(value)*2 FROM "+code+" where time > '" + lStart.get(0) + "' and time < '"+ lEnd.get(0) + "'";
         QueryResult meanQ = InfluxDaoConnector.getPoints(query);
 
         return meanQ.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString();
     }
 
 
-    public String mmRange(QueryResult res, int index, int range) {
+    public String mmRange(QueryResult res, String code, int index, int range) {
 
         List<Object> lStart = res.getResults().get(0).getSeries().get(0).getValues().get(index - range);
         List<Object> lEnd = res.getResults().get(0).getSeries().get(0).getValues().get(index);
 
         System.out.print(lStart.get(0).toString());
 
-        String query = "SELECT mean(value) FROM FR0000131708 where time > '" + lStart.get(0) + "' and time < '"+ lEnd.get(0) + "'";
+        String query = "SELECT mean(value) FROM "+code+" where time > '" + lStart.get(0) + "' and time < '"+ lEnd.get(0) + "'";
         QueryResult meanQ = InfluxDaoConnector.getPoints(query);
 
 
@@ -158,7 +158,7 @@ public class Analyse {
         Map<String,String> indice;
 
         public Container(String date) {
-            Map<String,String> indice = new HashMap<>();
+            indice = new HashMap<>();
             this.date = date;
         }
 

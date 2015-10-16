@@ -23,7 +23,7 @@ public class ParserHistory {
     static String startUrl="http://bourse.lesechos.fr/bourse/details/donnees_histo.jsp?fw3_component=dataList&fw3_autonomous=/bourse/details/donnees_histo-view.jsp&dataList_pageNum=";
     static String placeUrl ="&&place=";
     static String codeUrl ="&code=";
-    static String endUrl ="&OFFSET_START_RANGE=-36&CODE_RESOLUTION=DAY&codif=ISIN";
+    static String endUrl ="&OFFSET_START_RANGE=-36&CODE_RESOLUTION=DAY&codif=";
     static String refCode = "tr";
 
     public static void loader() {
@@ -32,7 +32,7 @@ public class ParserHistory {
         boolean retry = false;
         for (StockGeneral g: CacheStockGeneral.getCache().values()) {
             for(numPage = 20; numPage>0; numPage--) {
-                String url = startUrl + numPage + placeUrl + g.getPlace() + codeUrl + g.getCode() + endUrl;
+                String url = startUrl + numPage + placeUrl + g.getPlace() + codeUrl + g.getCode() + endUrl+ g.getCodif();
                 try {
                     String text = null;
 

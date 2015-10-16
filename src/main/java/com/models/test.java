@@ -1,20 +1,6 @@
 package com.models;
 
-import com.dao.InfluxDaoConnector;
-import com.influxdb.InfluxDB;
-import com.influxdb.InfluxDBFactory;
-import com.influxdb.dto.BatchPoints;
-import com.influxdb.dto.Point;
-import com.models.parser.ParserGeneral;
-import com.models.parser.ParserHistory;
-import com.models.parser.ScheduleParserGeneral;
-import org.joda.time.DateTime;
-
-import com.influxdb.dto.Query;
-import com.influxdb.dto.QueryResult;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import com.models.parser.ParserMain;
 
 /**
  * Created by gmo on 18/06/2015.
@@ -33,8 +19,8 @@ public class test {
         influxDB.createDatabase(dbName);
         influxDB.deleteDatabase(dbName);*/
 
-        ParserGeneral.loader();
-        ParserHistory.loader();
+        ParserMain.loaderAll();
+        //ParserHistory.loader();
         System.out.println("parsing ok");
 
 
@@ -59,6 +45,10 @@ public class test {
 
 
         System.out.print(meanQ);*/
+
+
+        /*Analyse a = new Analyse();
+        a.processAll();*/
 
 
 

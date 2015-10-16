@@ -57,7 +57,7 @@ public class ScheduleParserGeneral  {
 
 
     protected void runExtraction() {
-        ParserGeneral.loader();
+        ParserMain.loaderAll();
     }
 
 

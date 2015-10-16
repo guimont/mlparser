@@ -11,6 +11,8 @@ public class StockGeneral {
 
     private String place;
 
+    private String codif;
+
     /**
      * last price of stock
      */
@@ -46,6 +48,15 @@ public class StockGeneral {
      * volume
      */
     private Integer volume;
+
+
+    public String getCodif() {
+        return codif;
+    }
+
+    public void setCodif(String codif) {
+        this.codif = codif;
+    }
 
     public StockGeneral() {
     }
